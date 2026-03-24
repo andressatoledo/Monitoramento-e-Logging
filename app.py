@@ -38,7 +38,14 @@ def error():
     logger.error("Erro crítico detectado na rota de teste!")
     return "Erro simulado", 500
 
+@app.route('/sobrecarga')
+@REQUEST_TIME.time()
+def sobrecarga():
+    logger.warning("ALERTA: Processamento lento detectado na rota de sobrecarga")
+    time.sleep(2.0) 
+    return "Simulação de lentidão concluída", 200
+
 if __name__ == '__main__':
-    start_http_server(8000) [cite: 110]
+    start_http_server(8000) 
     logger.info("Iniciando aplicação na porta 5000 e métricas na 8000...")
     app.run(port=5000)
